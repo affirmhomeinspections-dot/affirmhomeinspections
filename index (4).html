@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Affirm Home Inspections | Central Illinois</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-dark: #111a30;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f9f6f0;
+      --white: #ffffff;
+      --gray: #6b7280;
+      --light-gray: #f3f0eb;
+      --text: #1a2744;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 39, 68, 0.97);
+      backdrop-filter: blur(10px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy-dark) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 3px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy-dark) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy-dark);
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.05) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 5%;
+      max-width: 700px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy-dark);
+      padding: 0.9rem 2rem;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 3px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+    .hero-stats {
+      position: absolute; right: 5%; bottom: 12%;
+      display: flex; flex-direction: column; gap: 1.5rem;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    .stat {
+      text-align: right;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.2rem;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--white);
+      border-bottom: 1px solid #e8e2d8;
+      padding: 1.25rem 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .trust-item svg { color: var(--gold); flex-shrink: 0; }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 5%; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--light-gray); }
+
+    .services-header { margin-bottom: 3.5rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5px;
+      background: #d8d2c8;
+      border: 1.5px solid #d8d2c8;
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover { background: var(--navy); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover .service-icon { color: var(--gold); }
+    .service-card:hover .service-name { color: var(--white); }
+    .service-card:hover .service-desc { color: rgba(255,255,255,0.6); }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+      color: var(--navy);
+      transition: color 0.25s;
+    }
+
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+      transition: color 0.25s;
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.7;
+      transition: color 0.25s;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-box {
+      background: var(--navy);
+      padding: 3rem;
+      border-radius: 2px;
+      position: relative;
+    }
+    .about-box::after {
+      content: '';
+      position: absolute;
+      bottom: -12px; right: -12px;
+      width: 100%; height: 100%;
+      border: 2px solid var(--gold);
+      border-radius: 2px;
+      z-index: -1;
+    }
+
+    .about-box-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .cred-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .cred-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+    .cred-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── AREA ── */
+    #area { background: var(--navy-dark); }
+    #area .section-title { color: var(--white); }
+    #area .section-sub { color: rgba(255,255,255,0.55); }
+
+    .area-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .area-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: rgba(255,255,255,0.8);
+      padding: 0.65rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-align: center;
+      border-radius: 2px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .area-tag:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--cream); }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .contact-info p {
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .contact-detail {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--navy);
+      font-weight: 500;
+    }
+    .contact-detail a {
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .contact-detail a:hover { color: var(--gold); }
+    .contact-icon {
+      width: 36px; height: 36px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { color: var(--gold); }
+
+    .contact-form {
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: 2px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      display: flex; flex-direction: column; gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1.5px solid #e0d9ce;
+      border-radius: 3px;
+      padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--cream);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      background: var(--white);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--gold); color: var(--navy-dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.5);
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.82rem;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--white);
+    }
+    .footer-brand span { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+
+      .hero-content { padding: 0 4%; }
+      .hero h1 { font-size: 2.6rem; }
+      .hero-stats { display: none; }
+
+      #about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 4rem 5%;
+      }
+      .about-box::after { display: none; }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .form-row { grid-template-columns: 1fr; }
+
+      section { padding: 4rem 5%; }
+      .trust-bar { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Affirm <span>Home Inspections</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#contact" class="nav-cta">Schedule Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      Certified · Trusted · Local
+    </div>
+    <h1>Know What You're<br><em>Getting Into.</em></h1>
+    <p class="hero-sub">
+      Professional home inspections for buyers, sellers, and business owners across Central Illinois. Honest findings. Clear reports. Peace of mind.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Schedule an Inspection</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Inspections Completed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24hr</div>
+      <div class="stat-label">Report Turnaround</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Licensed & Insured
+  </div>
+  <div class="trust-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    InterNACHI Certified
+  </div>
+  <div class="trust-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    HVAC Background
+  </div>
+  <div class="trust-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Same-Week Scheduling
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Inspection Services</h2>
+    <p class="section-sub">Every inspection is thorough, objective, and documented. You'll walk away with a clear picture — no surprises.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🏠</div>
+      <div class="service-name">Buyer's Inspection</div>
+      <p class="service-desc">The most important step before closing. We evaluate every major system — structure, electrical, plumbing, HVAC, roof, and more — so you can negotiate with confidence or walk away informed.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📋</div>
+      <div class="service-name">Pre-Listing Inspection</div>
+      <p class="service-desc">Sellers benefit from knowing exactly what buyers will find. Identify issues before listing to avoid deal-breaking surprises and price your home with authority.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🔬</div>
+      <div class="service-name">Mold Testing</div>
+      <p class="service-desc">Mold can be hidden, hazardous, and costly. We identify visible growth and conduct air quality sampling to give you a factual baseline before you buy or sell.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏢</div>
+      <div class="service-name">Commercial Inspections</div>
+      <p class="service-desc">Protect your investment in commercial property. We inspect office buildings, multi-unit residential, and light industrial — evaluating structural, mechanical, and safety systems thoroughly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-box">
+      <div class="about-box-title">Why Affirm?</div>
+      <ul class="cred-list">
+        <li class="cred-item"><div class="cred-dot"></div>Licensed Illinois Home Inspector</li>
+        <li class="cred-item"><div class="cred-dot"></div>Background in HVAC — means deeper mechanical insight than most inspectors</li>
+        <li class="cred-item"><div class="cred-dot"></div>Municipal code & permitting experience</li>
+        <li class="cred-item"><div class="cred-dot"></div>Clear, photo-documented reports delivered within 24 hours</li>
+        <li class="cred-item"><div class="cred-dot"></div>No upselling — objective findings only</li>
+        <li class="cred-item"><div class="cred-dot"></div>Available to walk you through findings after every inspection</li>
+      </ul>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">An Inspector Who Actually Knows Buildings</h2>
+    <p>Affirm Home Inspections is built on a simple belief: the person buying or selling a home deserves the full truth about what they're dealing with — not a quick walkthrough and a long PDF no one reads.</p>
+    <p>With a background in HVAC and years of municipal code and permitting work, Andrew Marshall brings a level of mechanical and structural insight that goes well beyond the standard inspection checklist.</p>
+    <p>Based in Central Illinois and serving the wider region, Affirm is your local, independent option — no franchise fees passed on to you, no conflict of interest, just a straight answer on every property.</p>
+    <a href="#contact" class="btn-primary" style="margin-top:1rem;">Get in Touch</a>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section id="area">
+  <div class="reveal">
+    <div class="section-label">Where We Work</div>
+    <h2 class="section-title" style="color:var(--white);">Central Illinois Service Area</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.55);">Based in the Bloomington-Normal area and serving communities throughout Central Illinois. Not sure if we cover your area? Just ask — we travel.</p>
+  </div>
+  <div class="area-grid reveal">
+    <div class="area-tag">Bloomington</div>
+    <div class="area-tag">Normal</div>
+    <div class="area-tag">Peoria</div>
+    <div class="area-tag">Decatur</div>
+    <div class="area-tag">Champaign</div>
+    <div class="area-tag">Urbana</div>
+    <div class="area-tag">Springfield</div>
+    <div class="area-tag">Lincoln</div>
+    <div class="area-tag">Pontiac</div>
+    <div class="area-tag">Gibson City</div>
+    <div class="area-tag">LeRoy</div>
+    <div class="area-tag">Chenoa</div>
+    <div class="area-tag">Clinton</div>
+    <div class="area-tag">Lexington</div>
+    <div class="area-tag">Eureka</div>
+    <div class="area-tag">+ Surrounding Areas</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-info reveal">
+      <div class="section-label">Get in Touch</div>
+      <h3>Ready to Schedule?</h3>
+      <p>Fill out the form and we'll get back to you within one business day to confirm your inspection. Same-week appointments usually available.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.22 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        </div>
+        <a href="tel:+13095550000">(309) 555-0000</a>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <a href="mailto:affirmhomeinspections@gmail.com">affirmhomeinspections@gmail.com</a>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        Central Illinois
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" placeholder="(309) 000-0000" />
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Buyer's Inspection</option>
+          <option>Pre-Listing Inspection</option>
+          <option>Mold Testing</option>
+          <option>Commercial Inspection</option>
+          <option>Not Sure / Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Property Address</label>
+        <input type="text" placeholder="123 Main St, Bloomington, IL" />
+      </div>
+      <div class="form-group">
+        <label>Message (optional)</label>
+        <textarea placeholder="Preferred dates, questions, anything else we should know..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit(event)">Send Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Affirm <span>Home Inspections</span></div>
+  <div>Licensed Illinois Home Inspector · Central Illinois</div>
+  <div>© 2026 Affirm Home Inspections. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Request Sent!';
+    btn.style.background = '#2d6a4f';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Send Request →';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
